@@ -1,54 +1,87 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>dev.finance$</title>
 </head>
+
 <body>
-  <h1>dev.finance$</h1>
 
-  <h2>Balanço</h2>
-  <h3>Entradas</h3>
-  <p>R$ 5.000,00</p>
+  <header>
 
-  <h3>Saídas</h3>
-  <p>R$ 2.000,00</p>
+    <h1 id="logo">dev.finance$</h1>
 
-  <h3>Total</h3>
-  <p>R$ 3.000,00</p>
+  </header>
 
-  <h2>Transações</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Descrição</th>
-        <th>Valor</th>
-        <th>Data</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Luz</td>
-        <td>- R$ 500,00</td>
-        <td>23/01/2021</td>
-      </tr>
+  <main>
 
-      <tr>
-        <td>Criação de Website</td>
-        <td>R$ 5.000,00</td>
-        <td>23/01/2021</td>
-      </tr>
+    <section id="balance">
 
-      <tr>
-        <td>Internet</td>
-        <td>- R$ 200,00</td>
-        <td>23/01/2021</td>
-      </tr>
-    </tbody>
-  </table>
+      <h2>Balanço</h2>
 
-  <footer>dev.finance$</footer>
+      <div class="card">
+        <h3>Entradas</h3>
+        <p>R$ 5.000,00</p>
+      </div>
+
+      <div class="card">
+        <h3>Saídas</h3>
+        <p>R$ 2.000,00</p>
+      </div>
+
+      <div class="card">
+        <h3>Total</h3>
+        <p>R$ 3.000,00</p>
+      </div>
+
+    </section>
+
+    <section id="transactions">
+
+      <h2>Transações</h2>
+
+      <table id="data-table">
+
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Luz</td>
+            <td>- R$ 500,00</td>
+            <td>23/01/2021</td>
+          </tr>
+
+          <tr>
+            <td>Criação de Website</td>
+            <td>R$ 5.000,00</td>
+            <td>23/01/2021</td>
+          </tr>
+
+          <tr>
+            <td>Internet</td>
+            <td>- R$ 200,00</td>
+            <td>23/01/2021</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </section>
+
+  </main>
+
+  <footer><p>dev.finance$</p></footer>
+
 </body>
+
 </html>
