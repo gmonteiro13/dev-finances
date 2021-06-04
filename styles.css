@@ -41,6 +41,21 @@ h2 {
   font-weight: normal;
 }
 
+/* Links and Buttons */
+a {
+  color: #49aa26;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #3dd705;
+}
+
+.button.new {
+  display: inline-block; /* Can't apply margin-bottom with inline */
+  margin-bottom: 0.8rem;
+}
+
 /* Header */
 header {
   background: #2D4A22;
@@ -75,6 +90,9 @@ header {
 .card h3 {
   font-weight: normal;
   font-size: 1rem;
+  display: flex; /* Put elements besides each other */
+  align-items: center;
+  justify-content: space-between; /* Puts space between elements inside the box */
 }
 
 .card p {
@@ -98,6 +116,11 @@ header {
 table thead th:first-child,
 table tbody td:first-child {
   border-radius: 0.25rem 0 0 0.25rem;
+}
+
+table thead th:last-child,
+table tbody td:last-child {
+  border-radius: 0 0.25rem 0.25rem 0;
 }
 
 table th {
