@@ -34,12 +34,32 @@ const transactions = [
   }
 ]
 
+/* isn't income always positive? */
 const Transaction = {
+  all: transactions,
+  add(transaction) {
+    Transaction.all.push(transaction)
+  },
   incomes() {
-
+    let income = 0;
+    Transaction.all.forEach(transaction => {
+      if (transaction.amount > 0) {
+        income += transaction.amount;
+      }
+    })
+    return income;
   },
   expenses() {
-
+    let expense = 0;
+    Transaction.all.forEach(transaction => {
+      if (transaction.amount < 0) {
+        expense += transaction.amount;
+      }
+    })
+    return expense;
+  },
+  total() {
+    return Transaction.incomes() + Transaction.expenses()
   }
 }
 
@@ -70,6 +90,22 @@ const DOM = {
             <td><img src="./assets/minus.svg" alt="Remover transação"></td>
     `
     return html
+  },
+
+  updateBalance() {
+    document
+      .getElementById('incomeDisplay')
+      .innerHTML = Utils.formatCurrency(Transaction.incomes())
+    document
+      .getElementById('expenseDisplay')
+      .innerHTML = Utils.formatCurrency(Transaction.expenses())
+    document
+      .getElementById('totalDisplay')
+      .innerHTML = Utils.formatCurrency(Transaction.total())
+  },
+
+  clearTransactions() {
+    DOM.transactionsContainer.innerHTML = ""
   }
 }
 
@@ -86,6 +122,18 @@ const Utils = {
   }
 }
 
-transactions.forEach(function(transaction){
-  DOM.addTransaction(transaction)
-})
+const App = {
+  init() {
+    Transaction.all.forEach(transaction => {
+      DOM.addTransaction(transaction)
+    })
+
+    DOM.updateBalance()
+  },
+  reload() {
+    DOM.clearTransactions()
+    App.init()
+  },
+}
+
+App.init()
