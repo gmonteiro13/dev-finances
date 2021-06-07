@@ -13,32 +13,32 @@ const Modal = {
   }
 }
 
-const transactions = [
+const Transaction = {
+  all: [
   {
-  id: 1,
-  description: 'Luz',
-  amount: -50000,
-  date: '23/01/2021'
+    description: 'Luz',
+    amount: -50000,
+    date: '23/01/2021'
   },
   {
-    id: 2,
     description: 'Website',
     amount: 500000,
     date: '23/01/2021'
   },
   {
-    id: 3,
     description: 'Internet',
     amount: -20000,
     date: '23/01/2021'
   }
-]
-
-/* isn't income always positive? */
-const Transaction = {
-  all: transactions,
+  ],
   add(transaction) {
     Transaction.all.push(transaction)
+  },
+
+  remove(index) {
+    Transaction.all.splice(index, 1)
+
+    App.reload()
   },
   incomes() {
     let income = 0;
@@ -110,6 +110,14 @@ const DOM = {
 }
 
 const Utils = {
+  formatAmount(value) {
+    value = Number(value) * 100
+    return value
+  },
+  formatDate(date) {
+    const splittedDate = date.split("-")
+    return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
+  },
   formatCurrency(value){
     const signal = Number(value) < 0 ? "-" : ""
     value = String(value).replace(/\D/g, "")
@@ -119,6 +127,59 @@ const Utils = {
       currency: "BRL"
     })
     return signal + value
+  }
+}
+
+const Form = {
+  description: document.querySelector('input#description'),
+  amount: document.querySelector('input#amount'),
+  date: document.querySelector('input#date'),
+
+  getValues() {
+    return {
+      description: Form.description.value,
+      amount: Form.amount.value,
+      date: Form.date.value
+    }
+  },
+  validateFields() {
+    const { description, amount, date } = Form.getValues()
+
+    if (description.trim() === "" ||
+        amount.trim() === "" ||
+        date.trim() === "") {
+          throw new Error("Por favor, preencha todos os campos")
+        }
+  },
+  formatValues() {
+    let { description, amount, date } = Form.getValues()
+    amount = Utils.formatAmount(amount)
+    date = Utils.formatDate(date)
+
+    return {
+      description,
+      amount,
+      date
+    }
+  },
+  clearFields() {
+    Form.description.value = ""
+    Form.amount.value = ""
+    Form.date.value = ""
+  },
+  submit(event) {
+    /* This will prevent the default HTML form behaviour of putting the info into
+    the URI */
+    event.preventDefault()
+
+    try {
+      Form.validateFields()
+      const transaction = Form.formatValues()
+      Transaction.add(transaction)
+      Form.clearFields()
+    } catch (error) {
+      alert(error.message)
+    }
   }
 }
 
